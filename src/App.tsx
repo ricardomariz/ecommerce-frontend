@@ -1,10 +1,13 @@
+import { Header } from "./components/Header/Header";
+import { ProductList } from "./components/ProductList/ProductList";
 import { GlobalStyle } from "./styles/global";
 
 export function App() {
   return (
-    <div className="App">
-      <h1> Hello World</h1>
+    <>
+      <Header />
+      <ProductList />
       <GlobalStyle />
-    </ div >
+    </>
   );
 }
