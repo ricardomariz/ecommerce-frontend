@@ -6,14 +6,13 @@ import { useAuth } from "../../providers/auth";
 
 function Store() {
   const history = useHistory();
-  console.log(useAuth())
-  const {authenticated} = useAuth();
+  const {authenticated, user} = useAuth();
   if (!authenticated) {
     history.push('/');
   }
   return (
     <>
-      <Header/>
+      <Header user={user}/>
       <ProductList />
     </>
   )

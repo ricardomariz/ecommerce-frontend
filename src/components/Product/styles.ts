@@ -13,6 +13,7 @@ export const Container = styled.div`
 `
 
 export const Image = styled.img`
+  max-width: 300px;
   max-height: 400px;
   cursor: pointer;
   transition: filter 0.2;

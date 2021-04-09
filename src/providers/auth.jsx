@@ -10,7 +10,6 @@ export function AuthProvider({children}) {
 
   useEffect(() => {
     const userStorage = localStorage.getItem('User');
-    console.log(userStorage)
     if (userStorage) {
       setUser(JSON.parse(userStorage));
     } else {
