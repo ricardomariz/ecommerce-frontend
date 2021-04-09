@@ -14,7 +14,6 @@ export function ProductList() {
       } catch (err) {
         console.log(err.response.data.message)
       }
-
     }
     loadProducts();
   }, [])
@@ -25,7 +24,7 @@ export function ProductList() {
       {
         products.map(product => {
           return (
-            <Product key={product} product={product} />
+            <Product key={product.id} product={product} />
           )
         })
       }

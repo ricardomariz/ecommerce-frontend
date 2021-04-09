@@ -1,11 +1,12 @@
+
 import { useEffect } from 'react';
-import { useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom';
+import { useAuth } from '../../providers/auth';
 import { Header } from "../../components/Header/Header";
-import { ProductList } from "../../components/ProductList/ProductList";
-import { useAuth } from "../../providers/auth";
+import { Container } from './styles';
 
+function ProductView() {
 
-function Store() {
   const history = useHistory();
   const {authenticated, user} = useAuth();
   
@@ -15,11 +16,15 @@ function Store() {
     }
   }, [history, authenticated])
 
-  return (
-    <>
+  return(
+    <Container>
       <Header user={user}/>
-      <ProductList />
-    </>
+      <h1>
+        Product View
+      </h1>
+    </Container>
+
   )
 }
-export { Store }
+
+export { ProductView }

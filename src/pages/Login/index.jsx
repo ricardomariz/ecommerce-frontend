@@ -10,6 +10,7 @@ function Login() {
   const [password, setPassword] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
   const {authenticated, setAuthenticated} = useAuth();
+  
   if (authenticated) {
     history.push('/store');
   }
@@ -24,8 +25,6 @@ function Login() {
         api.defaults.headers.Authorization = `Bearer ${token}`;
         localStorage.setItem('Token', token);
         localStorage.setItem('User', JSON.stringify(user));
-        setErrorMsg('')
-        console.log('oi')
         history.push('/store');
       } else {
         setErrorMsg('User is not active.')
