@@ -1,12 +1,16 @@
 import { Container, Image } from "./styles";
 
+interface Props {
+  img: string;
+}
 
-export function Product() {
+
+export function Product(props: Props) {
   return (
     <Container>
-      <Image src="https://a3.vnda.com.br/425x/thezion/2021/04/08/10_4_2_297__MG_9565.jpg?1617889693" alt="product_image" />
+      <Image src={props.img} alt="product_image" />
       <p>Rare jewelry</p>
-      <span>Price: $300.00</span>
+      <span>Price: $400.00</span>
   </Container>
   )
 }
