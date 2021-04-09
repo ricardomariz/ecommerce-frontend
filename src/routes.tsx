@@ -1,16 +1,19 @@
 import { BrowserRouter, Route} from 'react-router-dom';
-import { Home } from './pages/Home';
+import { Store } from './pages/Store';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
+import { AuthProvider } from './providers/auth';
 
 function Routes() {
 
   return (
-    <BrowserRouter>
-      <Route path='/' exact component={Login} />
-      <Route path='/store' component={Home} />
-      <Route path='/register' component={Register} />
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <Route path='/' exact component={Login} />
+        <Route path='/store' component={Store} />
+        <Route path='/register' component={Register} />
+      </BrowserRouter>
+    </AuthProvider>
   )
 }
 
