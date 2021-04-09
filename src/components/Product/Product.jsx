@@ -12,12 +12,13 @@ export function Product(props) {
     <Container>
       <Image src={props.product.images.length ? 
         props.product.images[0].image_name 
-        : 'https://icon-library.net/images/no-image-available-icon/no-image-available-icon-8.jpg'} 
+        : 'https://prgbrasil.com/wp-content/themes/consultix/images/no-image-found-360x250.png'} 
         alt="product_image" 
         onClick={() => handleClick(props.product.id)}
         />
       <p>{props.product.name}</p>
       <span>Price: ${props.product.price}</span>
+      <small>{props.product.description}</small>
   </Container>
   )
 }

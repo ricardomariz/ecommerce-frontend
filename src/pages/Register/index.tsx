@@ -8,15 +8,16 @@ import { FormEvent, useState } from 'react';
 function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errorMsg, setErrorMsg] = useState('')
+  const [errorMsg, setErrorMsg] = useState('');
+  const [confirmMsg, setConfirMsg] = useState('');
   
   
   async function handleSignUp(event: FormEvent) {
     event.preventDefault()
 
     try {
-      const response = await api.post('/users', {email, password})
-      console.log(response)
+       await api.post('/users', {email, password})
+        setConfirMsg('User created. You need to confirm your email.')
     } catch (err) {
       setErrorMsg(err.response.data.message)
 
@@ -45,6 +46,9 @@ function Register() {
           />
           {
             errorMsg && <Error>{errorMsg}</Error>
+          }
+           {
+            confirmMsg && <p>{confirmMsg}</p>
           }
           <div>
             <button type="submit" onClick={handleSignUp}> Sign up </button>

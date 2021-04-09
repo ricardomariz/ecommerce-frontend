@@ -1,28 +1,53 @@
+import { api } from '../../services/api';
 
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../../providers/auth';
 import { Header } from "../../components/Header/Header";
 import { Container } from './styles';
 
-function ProductView() {
-
+function ProductView(props) {
   const history = useHistory();
   const {authenticated, user} = useAuth();
-  
+  const [product, setProduct] = useState([])
+
+
+
   useEffect(() => {
     if (!authenticated) {
       history.push('/');
     }
-  }, [history, authenticated])
+    async function getProduct() {
+      try {
+        const response = await api.get('/products/' + props.match.params.id + '/')
+        setProduct(response.data)
+      } catch (err) {
+        console.log(err.response.data.message)
+      }
+    }
+    getProduct();
+  }, [history, authenticated, props.match.params.id])
+  
 
   return(
-    <Container>
+    <>
       <Header user={user}/>
-      <h1>
-        Product View
-      </h1>
-    </Container>
+      <Container>
+        <h1>
+          {product.name}
+        </h1>
+        <br/>
+        <p>
+          {product.description}
+        </p>
+        <br/>
+        <p>
+          {product.price}
+        </p>
+
+
+      </Container>
+    </>
 
   )
 }
