@@ -18,8 +18,10 @@ export function Header(props) {
     <Container>
       <Content>
         <h2>Eshop</h2>
-        <h4>Welcome, {props.user.email}.</h4>
-        <button onClick={handleSingOut}>Sign Out</button>
+        <div>
+           <h4>Welcome, {props.user.email}.</h4>
+           <button onClick={handleSingOut}>Sign Out</button>
+        </div>
       </Content>
     </Container>
   )
