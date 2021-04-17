@@ -54,6 +54,7 @@ export const FormLogin = styled.form`
   }
 
   small {
+    max-width: 200px;
     margin-top: 1rem;
     color: var(--text);
   }

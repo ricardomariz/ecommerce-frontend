@@ -11,10 +11,8 @@ export function Register() {
   async function register(event: FormEvent) {
     event.preventDefault();
     try {
-      const response = await api.post('/users', { email, password })
-      if (response.data) {
-        setMessage('Account created. Check your email to confirm registration.')
-      }
+      await api.post('/users', { email, password })
+      setMessage('Account created. Check your email to confirm registration.')
     } catch (err) {
       setMessage(err.response.data.message)
       setEmail('')

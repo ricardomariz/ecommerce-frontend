@@ -6,6 +6,10 @@ export const Container = styled.header`
   justify-content: space-between;
 
   margin: 2rem 0.5rem;
+
+  h2 {
+    color: var(--yellow);
+  }
   
   div {
     
@@ -17,7 +21,7 @@ export const Container = styled.header`
       align-self: flex-end;
       background: transparent;
       border: 0;
-      color: var(--text);
+      color: var(--yellow);
       cursor: pointer;
 
       transition: filter 0.2s;
