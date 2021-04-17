@@ -1,21 +1,18 @@
-import { BrowserRouter, Route} from 'react-router-dom';
-import { Store } from './pages/Store';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Login } from './pages/Login';
-import { ProductView } from './pages/ProductView'
 import { Register } from './pages/Register';
-import { AuthProvider } from './providers/auth';
+import { Store } from './pages/Store';
 
 function Routes() {
 
   return (
-    <AuthProvider>
-      <BrowserRouter>
-        <Route path='/' exact component={Login} />
-        <Route path='/store' component={Store} />
-        <Route path='/product/:id' component={ProductView} />
+    <BrowserRouter>
+      <Switch>
+        <Route path='/' exact component={Store} />
+        <Route path='/login' exact component={Login} />
         <Route path='/register' component={Register} />
-      </BrowserRouter>
-    </AuthProvider>
+      </Switch>
+    </BrowserRouter>
   )
 }
 
