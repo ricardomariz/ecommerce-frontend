@@ -1,5 +1,16 @@
+import { useAuth } from "../../providers/authProvider";
+import { Container } from "./styles";
+
 export function Header() {
+  const { user, userLogout } = useAuth()
   return (
-    <h1>Header</h1>
+    <Container>
+      <h2>Ecommerce</h2>
+      <div>
+        <h5>{user.user?.email}</h5>
+        <button type="button" onClick={userLogout}>Logout</button>
+      </div>
+
+    </Container>
   )
 }

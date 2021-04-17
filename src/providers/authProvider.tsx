@@ -23,7 +23,8 @@ interface LoginInputs {
 
 interface AuthContextData {
   user: UserLogged,
-  userLogin: (userInputs: LoginInputs) => Promise<void>
+  userLogin: (userInputs: LoginInputs) => Promise<void>,
+  userLogout: () => void
 }
 
 
@@ -62,8 +63,13 @@ export function AuthProvider({ children }: ProviderProp) {
     }
   }
 
+  function userLogout() {
+    setUser({} as UserLogged)
+    localStorage.setItem('@ecommerce:user', '')
+  }
+
   return (
-    <AuthContext.Provider value={{ user, userLogin }}>
+    <AuthContext.Provider value={{ user, userLogin, userLogout }}>
       {children}
     </AuthContext.Provider>
   )

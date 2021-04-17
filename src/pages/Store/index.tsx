@@ -1,12 +1,13 @@
 
-import { useAuth } from "../../providers/authProvider"
+import { Header } from "../../components/Header"
+import { Container } from "./styles"
 
 export function Store() {
-  const { user } = useAuth()
-
-
   return (
-    <h1>{user.user?.email}</h1>
+    <Container>
+      <Header />
+      <h1>Stora Page</h1>
+    </Container>
   )
 
 }

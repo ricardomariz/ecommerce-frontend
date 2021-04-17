@@ -6,7 +6,7 @@ import { Container, FormLogin } from "./styles";
 export function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const { user, userLogin } = useAuth();
+  const { userLogin } = useAuth();
 
   async function login(event: FormEvent) {
     event.preventDefault();
@@ -33,7 +33,6 @@ export function Login() {
         <button type="submit" onClick={login}>Login</button>
         <p>Not registered yet? </p>
         <p> Click <Link to='/register'> here</Link>! to register</p>
-        <h1>{user.user?.email}</h1>
       </FormLogin>
     </Container>
   )
