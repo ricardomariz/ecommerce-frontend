@@ -48,7 +48,9 @@ export function AuthProvider({ children }: ProviderProp) {
     if (user.token) {
       history.push('/')
     } else {
-      history.push('/login')
+      if (history.location.pathname !== '/register') {
+        history.push('/login')
+      }
     }
   }, [user, history])
 

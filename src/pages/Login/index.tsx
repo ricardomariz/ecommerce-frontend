@@ -30,7 +30,7 @@ export function Login() {
         />
         <input
           type="password"
-          placeholder="Senha"
+          placeholder="Password"
           value={password}
           onChange={event => setPassword(event.target.value)}
         />
