@@ -2,7 +2,12 @@ import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
   :root{
-    --background: #F8F2F5
+    --background: #141414;
+    --text: #EEF0F2;
+
+    --yellow: #EEC643;
+    --blue-light: #0D21A1;
+    --blue: #011638
   }
 
   * {
@@ -22,10 +27,22 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background-color: var(----background);
+    background: var(--background);
+    -webkit-font-smoothing: antialiased;
   }
-
+  body, input, textarea, button {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+  }
+  h1, h2, h3, h4, h5, h6, strong {
+    font-weight: 600;
+    color: var(--text);
+  }
   button {
     cursor: pointer;
+  }
+  [disabled] {
+    cursor: not-allowed;
+    opacity: 0.6;
   }
 `
