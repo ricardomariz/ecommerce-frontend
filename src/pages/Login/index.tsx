@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../providers/authProvider";
 import { Container, FormLogin } from "./styles";
@@ -6,17 +6,22 @@ import { Container, FormLogin } from "./styles";
 export function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const { userLogin } = useAuth();
+  const { userLogin, errorMsg } = useAuth();
 
   async function login(event: FormEvent) {
     event.preventDefault();
     userLogin({ email, password })
   }
 
+  useEffect(() => {
+    setPassword('')
+    setEmail('')
+  }, [errorMsg])
+
   return (
     <Container>
       <FormLogin>
-        <h1>login page</h1>
+        <h1>Ecommerce</h1>
         <input
           type="email"
           placeholder="Email"
@@ -29,6 +34,9 @@ export function Login() {
           value={password}
           onChange={event => setPassword(event.target.value)}
         />
+        {
+          errorMsg && <small>{errorMsg}</small>
+        }
 
         <button type="submit" onClick={login}>Login</button>
         <p>Not registered yet? </p>

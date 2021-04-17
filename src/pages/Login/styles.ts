@@ -47,5 +47,10 @@ export const FormLogin = styled.form`
       margin-top: 0rem;
     }
   }
+
+  small {
+    margin-top: 1rem;
+    color: #991010;
+  }
 `
 

@@ -23,6 +23,7 @@ interface LoginInputs {
 
 interface AuthContextData {
   user: UserLogged,
+  errorMsg: string,
   userLogin: (userInputs: LoginInputs) => Promise<void>,
   userLogout: () => void
 }
@@ -32,6 +33,7 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 export function AuthProvider({ children }: ProviderProp) {
   const history = useHistory()
+  const [errorMsg, setErrorMsg] = useState('')
   const [user, setUser] = useState<UserLogged>(() => {
     const user = localStorage.getItem('@ecommerce:user');
     if (user) {
@@ -56,10 +58,11 @@ export function AuthProvider({ children }: ProviderProp) {
       const response = await api.post('/sessions', userInputs)
       const user = response.data
       setUser(user)
+      setErrorMsg('')
       localStorage.setItem('@ecommerce:user', JSON.stringify(user))
     }
     catch (err) {
-      console.log(err.response.data.message)
+      setErrorMsg(err.response.data.message)
     }
   }
 
@@ -69,7 +72,7 @@ export function AuthProvider({ children }: ProviderProp) {
   }
 
   return (
-    <AuthContext.Provider value={{ user, userLogin, userLogout }}>
+    <AuthContext.Provider value={{ user, userLogin, userLogout, errorMsg }}>
       {children}
     </AuthContext.Provider>
   )
