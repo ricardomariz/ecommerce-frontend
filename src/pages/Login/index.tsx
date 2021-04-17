@@ -40,7 +40,7 @@ export function Login() {
 
         <button type="submit" onClick={login}>Login</button>
         <p>Not registered yet? </p>
-        <p> Click <Link to='/register'> here</Link>! to register</p>
+        <p> Click <Link to='/register'> here</Link> to register!</p>
       </FormLogin>
     </Container>
   )
