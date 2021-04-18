@@ -5,7 +5,12 @@ export const Container = styled.header`
   align-items: center;
   justify-content: space-between;
 
-  margin: 4rem 0.5rem;
+  @media (max-width: 400px) {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  margin: 4rem 1rem;
 
   h2 {
     color: var(--yellow);
@@ -14,10 +19,11 @@ export const Container = styled.header`
   div {
     
     display: flex;
+    margin: 0 0rem;
     flex-direction: column;
 
     button {
-      margin-top: 0.2rem;
+      margin: 0.2rem 0rem;
       align-self: flex-end;
       background: transparent;
       border: 0;

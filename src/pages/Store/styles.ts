@@ -5,6 +5,7 @@ export const Container = styled.div`
   margin: 0 auto;
 
   button {
+    margin: 0 1rem;
     background: transparent;
     border: 0;
     color: var(--yellow);
@@ -16,13 +17,11 @@ export const Container = styled.div`
       filter: brightness(0.5);
     }
   }
-
 `
 
 export const Content = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around; 
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   margin: 1rem;
 `
 
@@ -33,8 +32,8 @@ export const Product = styled.div`
   margin: 1rem 0.5rem;
 
   img {
-    max-width: 300px;
-    width: 100%;
+    max-width: 100%;
+    display: block;
   }
 
   h4 {
@@ -81,5 +80,44 @@ export const Remove = styled.button`
 
   &:hover{
     filter: brightness(0.5);
+  }
+`
+
+export const CreateForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h2 {
+    margin: 0.5rem 0rem;
+    color: var(--yellow);
+  }
+
+  input {
+    max-width: 300px;
+    min-width: 200px;
+    height: 2.5rem;
+    width: 100%;
+    margin: 0.5rem 0rem;
+    padding: 0.5rem;
+  }
+
+  input[type='file'] {
+    color: var(--yellow);
+    border: 0;
+    background: transparent;
+  }
+  button {
+    background-color: var(--yellow);
+    color: var(--background);
+    margin-top: 2rem;
+    font-weight: 600;
+    padding: 0.5rem 1.5rem;
+    
+    transition: filter 0.2s;
+
+    &:hover {
+      filter: brightness(0.7);
+    }
   }
 `
