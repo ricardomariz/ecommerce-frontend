@@ -5,7 +5,7 @@ export const Container = styled.header`
   align-items: center;
   justify-content: space-between;
 
-  margin: 2rem 0.5rem;
+  margin: 4rem 0.5rem;
 
   h2 {
     color: var(--yellow);

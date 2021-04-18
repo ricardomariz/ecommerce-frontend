@@ -43,15 +43,20 @@ export function AuthProvider({ children }: ProviderProp) {
     }
   });
 
+  if (user) {
+    api.defaults.headers.Authorization = `Bearer ${user.token}`
+  }
+
 
   useEffect(() => {
-    if (user.token) {
+    if (user.token && ((history.location.pathname === '/login') || (history.location.pathname === '/register'))) {
       history.push('/')
-    } else {
-      if (history.location.pathname !== '/register') {
-        history.push('/login')
-      }
     }
+
+    if (!user.token && history.location.pathname !== '/register') {
+      history.push('/login')
+    }
+
   }, [user, history])
 
 
@@ -62,6 +67,7 @@ export function AuthProvider({ children }: ProviderProp) {
       setUser(user)
       setErrorMsg('')
       localStorage.setItem('@ecommerce:user', JSON.stringify(user))
+      api.defaults.headers.Authorization = `Bearer ${user.token}`
     }
     catch (err) {
       setErrorMsg(err.response.data.message)
@@ -71,6 +77,7 @@ export function AuthProvider({ children }: ProviderProp) {
   function userLogout() {
     setUser({} as UserLogged)
     localStorage.setItem('@ecommerce:user', '')
+    api.defaults.headers.Authorization = ''
   }
 
   return (
