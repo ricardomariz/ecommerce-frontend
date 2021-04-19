@@ -4,7 +4,7 @@ import Modal from "react-modal"
 import { Header } from "../../components/Header"
 import { useAuth } from "../../providers/authProvider"
 import { api } from "../../services/api"
-import { Container, Content, CreateForm, Product, Remove } from "./styles"
+import { Container, Content, CreateForm, Product, ProductImages, Remove } from "./styles"
 
 interface ProductImage {
   image_name: string;
@@ -25,7 +25,7 @@ export function Store() {
   const [modalIsOpen, setIsOpen] = useState(false)
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
-  const [image, setImage] = useState<File>()
+  const [images, setImages] = useState<FileList>()
   const [price, setPrice] = useState(0)
 
   function openModal() {
@@ -47,7 +47,7 @@ export function Store() {
     const fileList = e.target.files;
     if (!fileList) return
 
-    setImage(fileList[0])
+    setImages(fileList)
   }
 
   async function addProduct(event: FormEvent) {
@@ -63,15 +63,16 @@ export function Store() {
       const response = await api.post('/products', product)
       const newProduct = response.data
 
-      if (image) {
-        const formData = new FormData();
-        formData.append("file", image, image.name)
+      if (images) {
+        const formData = new FormData()
+        for (let index = 0; index < images.length; index++) {
+          formData.append("file", images[index], images[index].name)
+
+        }
         await api.post('/products/images/' + newProduct.id, formData)
-        console.log('criei foto')
       }
 
       await getProducts()
-      console.log('peguei os produtos')
       setIsOpen(false)
       setName('')
       setDescription('')
@@ -123,7 +124,15 @@ export function Store() {
         {
           products.map(product => (
             <Product key={product.id}>
-              <img src={product.images[0]?.image_name ? product.images[0].image_name : 'https://osceia.org.br/js/learnpress/assets/images/no-image.png'} alt={product.name} />
+              <ProductImages>
+                {
+                  product.images[0] ?
+                    product.images.map(image => (
+                      <img src={image.image_name} alt={product.name} />
+                    )) : <img src='https://osceia.org.br/js/learnpress/assets/images/no-image.png' alt={product.name} />
+
+                }</ProductImages>
+
               <h4>{product.name}</h4>
               <h5>{new Intl.NumberFormat('pt-br', {
                 style: 'currency',

@@ -31,11 +31,6 @@ export const Product = styled.div`
   align-items: center;
   margin: 1rem 0.5rem;
 
-  img {
-    max-width: 100%;
-    display: block;
-  }
-
   h4 {
     color: var(--text);
     font-weight: 600;
@@ -119,5 +114,18 @@ export const CreateForm = styled.form`
     &:hover {
       filter: brightness(0.7);
     }
+  }
+`
+
+export const ProductImages = styled.div`
+  display: flex;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  height: 100%;
+  
+  img {
+    max-width: 100%;
+    display: inline-block;
   }
 `
