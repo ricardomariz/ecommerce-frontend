@@ -25,6 +25,7 @@ export function Store() {
   const [modalIsOpen, setIsOpen] = useState(false)
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
+  const [image, setImage] = useState<File>()
   const [price, setPrice] = useState(0)
 
   function openModal() {
@@ -41,6 +42,14 @@ export function Store() {
     setProducts(products)
   }
 
+
+  function handleImageChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const fileList = e.target.files;
+    if (!fileList) return
+
+    setImage(fileList[0])
+  }
+
   async function addProduct(event: FormEvent) {
     event.preventDefault()
 
@@ -51,8 +60,18 @@ export function Store() {
       user_id: user.user.id
     }
     try {
-      await api.post('/products', product)
+      const response = await api.post('/products', product)
+      const newProduct = response.data
+
+      if (image) {
+        const formData = new FormData();
+        formData.append("file", image, image.name)
+        await api.post('/products/images/' + newProduct.id, formData)
+        console.log('criei foto')
+      }
+
       await getProducts()
+      console.log('peguei os produtos')
       setIsOpen(false)
       setName('')
       setDescription('')
@@ -93,6 +112,7 @@ export function Store() {
           <input placeholder="Name" value={name} onChange={event => setName(event.target.value)} />
           <input type="text" placeholder="Description" onChange={event => setDescription(event.target.value)} />
           <input type="number" placeholder="Price" min='0' onChange={event => setPrice(Number(event.target.value))} />
+          <input type="file" name="file" multiple accept=".jpg, .jpeg, .png" onChange={handleImageChange} />
           <button type="submit" onClick={addProduct}>Create</button>
         </CreateForm>
 
@@ -103,7 +123,7 @@ export function Store() {
         {
           products.map(product => (
             <Product key={product.id}>
-              <img src={product.images[0]?.image_name ? product.images[0].image_name : 'http://localhost:3333/tmp/images/products/26acb133a00ad27c934385e82c6d55c0-Passaporte-node-js.png'} alt={product.name} />
+              <img src={product.images[0]?.image_name ? product.images[0].image_name : 'https://osceia.org.br/js/learnpress/assets/images/no-image.png'} alt={product.name} />
               <h4>{product.name}</h4>
               <h5>{new Intl.NumberFormat('pt-br', {
                 style: 'currency',
